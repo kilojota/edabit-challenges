@@ -9,3 +9,6 @@ function flatten(arr) {
   }
   return arr2;
 }
+
+// Great solution, now think of a way to flatten an array that might have multiple nested arrays.
+// For example: [[1,2,3], [[4,5], [6], 7]]
