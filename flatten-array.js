@@ -9,3 +9,27 @@ function flatten(arr) {
   }
   return arr2;
 }
+
+// Great solution, now think of a way to flatten an array that might have multiple nested arrays.
+// For example: [[1,2,3], [[4,5], [6], 7]]
+
+// Fabricio: Solution using recursion
+const exampleArr = [3, [1, 2, 3], [[4, 5], [6, [5, 6, [9]]], 7, [2, [5, [7, 8]]]]];
+
+function flattenMultipleDepths(arr) {
+  arr2 = [];
+  const checkDepth = arr => {
+    arr.forEach(arrOrValue => {
+      if (arrOrValue[0] == undefined) {
+        arr2.push(arrOrValue);
+        return;
+      } else {
+        checkDepth(arrOrValue);
+      }
+    });
+  };
+  checkDepth(arr);
+  return arr2;
+}
+
+flattenMultipleDepths(exampleArr); // => [3, 1, 2, 3, 4, 5,6, 5, 6, 9, 7, 2,5, 7, 8];
