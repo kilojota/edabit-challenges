@@ -14,16 +14,21 @@ function flatten(arr) {
 // For example: [[1,2,3], [[4,5], [6], 7]]
 
 // Fabricio: Solution using recursion
-const exampleArr = [3, [1, 2, 3], [[4, 5], [6, [5, 6, [9]]], 7, [2, [5, [7, 8]]]]];
+const exampleArr = [3, [1, 2, [], null, [null]], [[4, 5], [6, [null]], 7, [2, [5, [[[4, [[[null]]]]], 8]]]]];
 
 function flattenMultipleDepths(arr) {
   arr2 = [];
   const checkDepth = arr => {
     arr.forEach(arrOrValue => {
-      if (arrOrValue[0] == undefined) {
+      if (arrOrValue == undefined) {
+        return;
+      }
+
+      if (arrOrValue[0] === undefined && Number.isInteger(arrOrValue)) {
+        console.log(arrOrValue);
         arr2.push(arrOrValue);
         return;
-      } else {
+      } else if (arrOrValue[0] && arrOrValue[0].length != 0) {
         checkDepth(arrOrValue);
       }
     });
@@ -32,4 +37,4 @@ function flattenMultipleDepths(arr) {
   return arr2;
 }
 
-flattenMultipleDepths(exampleArr); // => [3, 1, 2, 3, 4, 5,6, 5, 6, 9, 7, 2,5, 7, 8];
+console.log(flattenMultipleDepths(exampleArr)); // => [3, 1, 2, 3, 4, 5,6, 5, 6, 9, 7, 2,5, 7, 8];
